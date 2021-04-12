@@ -27,7 +27,7 @@
         },
         {
             "type": "cppbuild",
-            "label": "MacOS | C++: build active file",
+            "label": "macOS | C++: build active file",
             "command": "clang++",
             "args": [
                 "-g",
