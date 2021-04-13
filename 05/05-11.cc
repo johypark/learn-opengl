@@ -6,34 +6,43 @@
 
 #include <GL/glut.h>
 
+GLfloat delta = 0.0;
+
 void MyDisplay() {
   glClear(GL_COLOR_BUFFER_BIT);
-  glViewport(0, 0, 300, 300);
 
   glBegin(GL_POLYGON);
-  glColor3f(1.0, 1.0, 1.0);
-  glVertex3f(-0.5, -0.5, 0.0);
-  glVertex3f(0.5, -0.5, 0.0);
-  glVertex3f(0.5, 0.5, 0.0);
-  glVertex3f(-0.5, 0.5, 0.0);
+  glColor3f(0.0, 0.5, 0.8);
+  glVertex3f(-1.0 + delta, -0.5, 0.0);
+  glVertex3f(0.0 + delta, -0.5, 0.0);
+  glVertex3f(0.0 + delta, 0.5, 0.0);
+  glVertex3f(-1.0 + delta, 0.5, 0.0);
   glEnd();
 
-  glFlush();
+  glutSwapBuffers();
+}
+
+void MyTimer(int value) {
+  delta += 0.001;
+
+  glutPostRedisplay();
+  glutTimerFunc(40, MyTimer, 1);
 }
 
 int main(int argc, char* argv[]) {
   glutInit(&argc, argv);
-  glutInitDisplayMode(GLUT_RGB);
+  glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE);
   glutInitWindowSize(300, 300);
   glutInitWindowPosition(0, 0);
-  glutCreateWindow("OpenGL Sample Drawing");
+  glutCreateWindow("OpenGL Drawing Example");
 
-  glClearColor(0.0, 0.0, 0.0, 1.0);
+  glClearColor(1.0, 1.0, 1.0, 1.0);
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
   glOrtho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);
 
   glutDisplayFunc(MyDisplay);
+  glutTimerFunc(40, MyTimer, 1);
 
   glutMainLoop();
 }

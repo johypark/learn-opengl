@@ -12,8 +12,8 @@ void MyDisplay() {
   glViewport(0, 0, 300, 300);
   glClear(GL_COLOR_BUFFER_BIT);
 
-  glColor3f(0.5, 0.5, 0.5);
   glBegin(GL_POLYGON);
+  glColor3f(0.5, 0.5, 0.5);
   glVertex3f(top_left_x / 300.0, (300 - top_left_y) / 300.0, 0.0);
   glVertex3f(top_left_x / 300.0, (300 - bottom_right_y) / 300.0, 0.0);
   glVertex3f(bottom_right_x / 300.0, (300 - bottom_right_y) / 300.0, 0.0);
