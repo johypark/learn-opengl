@@ -32,6 +32,7 @@ int main(int argc, char* argv[]) {
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
   glOrtho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);
+
   glutDisplayFunc(MyDisplay);
 
   glutMainLoop();

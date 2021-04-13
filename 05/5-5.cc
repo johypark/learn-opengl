@@ -40,6 +40,7 @@ int main(int argc, char* argv[]) {
   glutCreateWindow("OpenGL Example Drawing");
 
   glClearColor(1.0, 1.0, 1.0, 1.0);
+
   glutDisplayFunc(MyDisplay);
   glutReshapeFunc(MyReshape);
 

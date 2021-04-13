@@ -6,27 +6,33 @@
 
 #include <GL/glut.h>
 
+GLboolean is_sphere = true;
+
 void MyDisplay() {
   glClear(GL_COLOR_BUFFER_BIT);
 
-  glColor3f(0.5, 0.5, 0.5);
-  glBegin(GL_POLYGON);
-  glVertex3f(-0.5, -0.5, 0.0);
-  glVertex3f(0.5, -0.5, 0.0);
-  glVertex3f(0.5, 0.5, 0.0);
-  glVertex3f(-0.5, 0.5, 0.0);
-  glEnd();
+  glColor3f(0.5, 0.0, 0.5);
+  if (is_sphere)
+    glutWireSphere(0.2, 15, 15);
+  else
+    glutWireTorus(0.1, 0.3, 40, 20);
 
   glFlush();
 }
 
-void MyKeyboard(unsigned char key_pressed, int x, int y) {
-  switch (key_pressed) {
-    case 'Q':
-    case 'q':
-    case 27:
+void MyMainMenu(int entry_id) {
+  switch (entry_id) {
+    case 1:
+      is_sphere = true;
+      break;
+    case 2:
+      is_sphere = false;
+      break;
+    case 3:
       exit(0);
   }
+
+  glutPostRedisplay();
 }
 
 int main(int argc, char* argv[]) {
@@ -41,8 +47,13 @@ int main(int argc, char* argv[]) {
   glLoadIdentity();
   glOrtho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);
 
+  GLint my_main_menu_id = glutCreateMenu(MyMainMenu);
+  glutAddMenuEntry("Draw Sphere", 1);
+  glutAddMenuEntry("Draw Torus", 2);
+  glutAddMenuEntry("Exit", 3);
+  glutAttachMenu(GLUT_RIGHT_BUTTON);
+
   glutDisplayFunc(MyDisplay);
-  glutKeyboardFunc(MyKeyboard);
 
   glutMainLoop();
 }

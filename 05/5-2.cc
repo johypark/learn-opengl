@@ -22,6 +22,7 @@ void MyDisplay() {
 int main(int argc, char* argv[]) {
   glutInit(&argc, argv);
   glutCreateWindow("OpenGL Drawing Example");
+
   glutDisplayFunc(MyDisplay);
 
   glutMainLoop();
