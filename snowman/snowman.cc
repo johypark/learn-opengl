@@ -10,7 +10,7 @@
 #include <vector>
 
 int MX = 300, MY = 300;
-float time = 0;
+float timer = 0;
 
 float x = 0, y = 0;
 
@@ -74,7 +74,7 @@ void MyKeyboard(unsigned char KeyPressed, int X, int Y) {
 }
 
 void MyIdle() {
-  time += 1.0;
+  timer += 50.0;
   glutPostRedisplay();
 }
 
@@ -113,7 +113,7 @@ void InitLight() {
 }
 
 bool HitCheck() {
-  vec3 big_snow(sin(time * 0.0001) * 10, 1.0, -7);
+  vec3 big_snow(sin(timer * 0.001) * 10, 1.0, -7);
   int size = snowballs.size();
   for (int i = 0; i < size; i++) {
     vec3 diff = big_snow - snowballs[i].pos;
@@ -124,7 +124,7 @@ bool HitCheck() {
 
 void UpdateSnowballs() {
   vec3 acc(0, -0.8, 0);
-  float snowTime = 0.001;
+  float snowTime = 0.1;
 
   int size = snowballs.size();
   for (int i = 0; i < size; i++) {
@@ -166,7 +166,7 @@ void DrawSnowman() {
 
   glPushMatrix();
   glTranslatef(2.5, 0, 0);
-  glRotatef(sin(time * 0.0005) * 30 - 30, 0, 0, 1);
+  glRotatef(sin(timer * 0.005) * 30 - 30, 0, 0, 1);
   glTranslatef(0, 2.5, 0);
   glPushMatrix();
   glScalef(0.1, 1, 0.1);
@@ -174,14 +174,14 @@ void DrawSnowman() {
   glPopMatrix();
   glTranslatef(0, 2.5, 0);
   glPushMatrix();
-  glRotatef(sin(time * 0.0005) * 15 + 15, 0, 0, 1);
+  glRotatef(sin(timer * 0.005) * 15 + 15, 0, 0, 1);
   glTranslatef(0, 1.5, 0);
   glScalef(0.1, 1, 0.1);
   glutSolidCube(3);
   glPopMatrix();
   glPopMatrix();
 
-  glRotatef(sin(time * 0.0005) * 15, 1, 0, 0);
+  glRotatef(sin(timer * 0.005) * 15, 1, 0, 0);
   glTranslatef(0, 6, 0);
   glutSolidSphere(3, 20, 20);
   glPopMatrix();
@@ -207,7 +207,7 @@ void MyDisplay() {
   // Snowman 2
   glPushMatrix();
   glTranslatef(0, 0, -7);
-  glTranslatef(sin(time * 0.0001) * 10, 0, 0);
+  glTranslatef(sin(timer * 0.001) * 10, 0, 0);
   glScalef(0.3, 0.3, 0.3);
   DrawSnowman();
   glPopMatrix();
